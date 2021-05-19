@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TesteID">
-        <activity android:name="com.example.testeeventos.activity.MainActivity" />
-        <activity android:name="com.example.testeeventos.activity.SplashScreenActivity"
+        <activity android:name=".activity.DetlhesEventoActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

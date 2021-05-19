@@ -1,5 +1,6 @@
 package com.example.testeeventos.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,19 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testeeventos.R
+import com.example.testeeventos.activity.DetlhesEventoActivity
 import com.example.testeeventos.model.Eventos
-import com.example.testeeventos.util.ImageCallback
-import com.squareup.picasso.Picasso
+import com.example.testeeventos.util.Converter
+import com.example.testeeventos.util.Converter.Companion.adicionarImageEvento
+import com.example.testeeventos.util.Converter.Companion.getDateTime
+import com.example.testeeventos.util.Converter.Companion.inserirTexto
+
 
 class ListaEventoAdapter( var eventos: List<Eventos>) : RecyclerView.Adapter<ListaEventoAdapter.ViewHolder>(){
+
+    companion object {
+        const val EVENTO_ID = "evento_id"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -23,12 +32,12 @@ class ListaEventoAdapter( var eventos: List<Eventos>) : RecyclerView.Adapter<Lis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val events : Eventos = eventos[position]
         holder.bind(events)
-//        holder.itemView.setOnClickListener {
-//            val intent = Intent(it.context, EventItemActivity::class.java)
-//
-//            intent.putExtra(EVENT_ID, events.id)
-//            it.context.startActivity(intent)
-//        }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(it.context, DetlhesEventoActivity::class.java)
+
+            intent.putExtra(EVENTO_ID, events.id)
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = eventos.size
@@ -49,41 +58,13 @@ class ListaEventoAdapter( var eventos: List<Eventos>) : RecyclerView.Adapter<Lis
         fun bind(event: Eventos) {
             title.text = event.title
             description.text = event.description
-            data.text = event.date
+            data.text = getDateTime(event.date)
             if(!event.image.contains("https")){
                val imageFormatada =  inserirTexto(event.image,"s",4)
-                imageFormatada.let {
-                    Picasso.get()
-                        .load(imageFormatada)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .error(R.drawable.ic_launcher_foreground)
-                        .into(image, object : ImageCallback() {
-                            override fun onAfterLoad() {
-                                pbItemEvent?.visibility = View.GONE
-                            }
-                        })
-                }
+                adicionarImageEvento(imageFormatada,image,pbItemEvent)
             }else{
-                event.image.let {
-                    Picasso.get()
-                        .load(event.image)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .error(R.drawable.ic_launcher_foreground)
-                        .into(image, object : ImageCallback() {
-                            override fun onAfterLoad() {
-                                pbItemEvent?.visibility = View.GONE
-                            }
-                        })
-                }
+                adicionarImageEvento(event.image, image,pbItemEvent)
             }
-
         }
-
-    }
-    fun inserirTexto (stringOriginal: String, addString : String, indices: Int): String {
-        return(stringOriginal.substring(0, indices)
-                + addString
-                + stringOriginal.substring(indices)
-                );
     }
 }

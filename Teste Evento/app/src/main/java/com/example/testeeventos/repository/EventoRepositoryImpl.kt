@@ -7,7 +7,7 @@ class EventoRepositoryImpl(private val retrofitService: RetrofitBuilder) : Event
 
     override suspend fun getEvents(): List<Eventos> = retrofitService.apiService.getAllEvents()
 
-    override suspend fun getEvent(id: Int): Eventos = retrofitService.apiService.getEvent(id)
+    override suspend fun getEvent(id: String): Eventos = retrofitService.apiService.getEvent(id)
 
     override suspend fun postCheckIn(checkIn: CheckIn) = retrofitService.apiService.postCheckIn(checkIn)
 }

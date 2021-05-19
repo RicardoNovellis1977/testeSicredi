@@ -13,7 +13,7 @@ interface ApiEventos {
     suspend fun getAllEvents(): List<Eventos>
 
     @GET("api/events/{id}")
-    suspend fun getEvent(@Path("id") id: Int): Eventos
+    suspend fun getEvent(@Path("id") id: String): Eventos
 
     @POST("/checkin")
     suspend fun postCheckIn(@Body checkIn: CheckIn)
