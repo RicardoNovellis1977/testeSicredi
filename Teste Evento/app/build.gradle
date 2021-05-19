@@ -42,4 +42,39 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //Koin
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+
+    // ViewModel e activity-ktx
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation 'androidx.activity:activity-ktx:1.1.0'
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation 'androidx.lifecycle:lifecycle-common:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+    implementation 'android.arch.lifecycle:extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //OkHttp
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
+        force = true //API 19 support
+    }
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.12"
+
 }

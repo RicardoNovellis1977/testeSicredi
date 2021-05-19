@@ -1,4 +1,4 @@
-package com.example.testeEventos
+package com.example.testeeventos
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
