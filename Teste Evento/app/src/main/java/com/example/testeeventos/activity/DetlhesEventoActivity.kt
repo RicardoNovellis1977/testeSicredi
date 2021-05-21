@@ -15,8 +15,6 @@ import com.example.testeeventos.util.Converter
 import com.example.testeeventos.util.Converter.Companion.adicionarImageEvento
 import com.example.testeeventos.util.Converter.Companion.inserirTexto
 import com.example.testeeventos.viewmodel.ViewModelDetailEvento
-import com.example.testeeventos.viewmodel.ViewModelEventos
-import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetlhesEventoActivity : AppCompatActivity() {
@@ -30,6 +28,10 @@ class DetlhesEventoActivity : AppCompatActivity() {
     private lateinit var btnShare: Button
     private lateinit var progressBar: ProgressBar
     private val viewModel: ViewModelDetailEvento by viewModel()
+
+    companion object {
+        const val ID_EVENTO = "id_evento"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,7 @@ class DetlhesEventoActivity : AppCompatActivity() {
             eventoDrescricao.text = evento.description
             eventoData.text = Converter.getDateTime(evento.date)
             eventoPreco.text = Converter.currencyFormatter(evento.price)
-            if(!evento.image.contains("https")){
+            if(!evento.image.contains(getString(R.string.https_imagem))){
                 val imageFormatada = inserirTexto(evento.image, "s", 4)
                 adicionarImageEvento(imageFormatada, imageDetalhe,null)
             }else{
@@ -57,6 +59,8 @@ class DetlhesEventoActivity : AppCompatActivity() {
                 shareContent(evento.title)
             }
 
+            btnChechIn.setOnClickListener {
+                evento.id?.let { it1 -> abrirCheckIn(it1) } }
         })
         idEvento?.let { viewModel.getEvent(it) }
 
@@ -80,5 +84,11 @@ class DetlhesEventoActivity : AppCompatActivity() {
             type = "text/plain"
         }
         startActivity(Intent.createChooser(sendIntent, null))
+    }
+
+    private fun abrirCheckIn(idEvento: String){
+        val intent : Intent = Intent(this,CheckInActivity:: class.java)
+        intent.putExtra(ID_EVENTO, idEvento )
+        startActivity(intent)
     }
 }

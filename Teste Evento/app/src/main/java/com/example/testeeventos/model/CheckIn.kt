@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CheckIn(
     @SerializedName("eventId")
-    val eventId: Int?,
+    val eventId: String?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("email")

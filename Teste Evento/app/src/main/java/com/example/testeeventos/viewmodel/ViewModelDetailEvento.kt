@@ -1,6 +1,5 @@
 package com.example.testeeventos.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +11,6 @@ class ViewModelDetailEvento(private val eventoRepository: EventoRepository) : Vi
 
     val eventoData = MutableLiveData<Eventos>()
     val error = MutableLiveData<Boolean>()
-
 
     fun getEvent(id: String) {
         viewModelScope.launch {
